@@ -70,16 +70,10 @@ export function Navbar() {
             />
           </span>
           <span
-            className="hidden sm:inline font-serif font-bold text-[17px] tracking-tight leading-none"
+            className="font-serif font-bold text-[15px] sm:text-[17px] tracking-tight leading-none whitespace-nowrap"
             style={{ fontFamily: "var(--font-eb-garamond)" }}
           >
             Al Majaz Al Khleej
-          </span>
-          <span
-            className="sm:hidden font-serif font-bold text-base tracking-tight leading-none"
-            style={{ fontFamily: "var(--font-eb-garamond)" }}
-          >
-            MAK
           </span>
         </Link>
 

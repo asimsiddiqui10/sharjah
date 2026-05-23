@@ -67,7 +67,7 @@ export function Reveal({
   return (
     <As
       ref={ref}
-      className={cn("reveal", className)}
+      className={cn("reveal h-full", className)}
       style={style}
     >
       {children}

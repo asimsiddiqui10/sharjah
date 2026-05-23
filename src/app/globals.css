@@ -170,7 +170,9 @@ h3.serif {
     0 12px 32px -8px rgba(0, 0, 0, 0.55);
 }
 
-/* Card baseline used throughout */
+/* Card baseline used throughout. Visual-only — add `h-full flex flex-col`
+   on the article/li/figure when the card sits inside an `auto-rows-fr`
+   grid and you want equal heights with `mt-auto` pin support. */
 .card-base {
   background: var(--card);
   border: 1px solid var(--border);

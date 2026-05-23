@@ -127,9 +127,9 @@ export default function AboutPage() {
           eyebrow="Our philosophy"
           title="How we think about property management."
         />
-        <RevealGroup className="mt-14 grid gap-5 lg:grid-cols-3" step={90}>
+        <RevealGroup className="mt-14 grid auto-rows-fr gap-5 lg:grid-cols-3" step={90}>
           {PILLARS.map((p, i) => (
-            <article key={p.title} className="card-base p-8">
+            <article key={p.title} className="card-base flex h-full flex-col p-8">
               <div
                 className="font-serif text-3xl text-gradient"
                 style={{ fontFamily: "var(--font-eb-garamond)" }}
@@ -157,9 +157,9 @@ export default function AboutPage() {
           title="The people behind the portfolio."
           intro="From our management office to our on-ground maintenance crew, every person who works here is committed to the same standard — the one our founders set over 40 years ago."
         />
-        <RevealGroup className="mt-14 grid gap-5 sm:grid-cols-2" step={80}>
+        <RevealGroup className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2" step={80}>
           {TEAM.map(({ icon: Icon, title, body }) => (
-            <article key={title} className="card-base p-8">
+            <article key={title} className="card-base flex h-full flex-col p-8">
               <div className="flex items-start gap-5">
                 <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-accent">
                   <Icon className="h-5 w-5" />
@@ -189,9 +189,9 @@ export default function AboutPage() {
             title="Doing things right — every time."
             intro="We take regulatory compliance seriously, not as a checkbox exercise but as a reflection of our values. Our operations are fully aligned with:"
           />
-          <RevealGroup as="ul" className="grid gap-3 sm:grid-cols-2" step={60}>
+          <RevealGroup as="ul" className="grid auto-rows-fr gap-3 sm:grid-cols-2" step={60}>
             {COMPLIANCE.map(([label, body]) => (
-              <li key={label} className="card-base p-6">
+              <li key={label} className="card-base flex h-full flex-col p-6">
                 <div className="text-xs font-medium uppercase tracking-[0.16em] text-brand-600 dark:text-brand-accent">
                   {label}
                 </div>
@@ -210,11 +210,11 @@ export default function AboutPage() {
           eyebrow="Our commitment"
           title="What we promise every resident."
         />
-        <RevealGroup as="ul" className="mt-12 grid gap-4 lg:grid-cols-2" step={70}>
+        <RevealGroup as="ul" className="mt-12 grid auto-rows-fr gap-4 lg:grid-cols-2" step={70}>
           {PROMISES.map((p, i) => (
             <li
               key={p}
-              className="card-base flex items-start gap-5 p-6"
+              className="card-base flex h-full items-start gap-5 p-6"
             >
               <span
                 className="font-serif text-2xl text-gradient leading-none"

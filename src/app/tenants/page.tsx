@@ -81,11 +81,11 @@ export default function TenantsPage() {
           title="We're easy to find."
         />
         <RevealGroup
-          className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-4"
           step={60}
         >
           {REACH.map(({ icon: Icon, title, body }) => (
-            <article key={title} className="card-base p-7">
+            <article key={title} className="card-base flex h-full flex-col p-7">
               <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-accent">
                 <Icon className="h-5 w-5" />
               </div>
@@ -109,9 +109,9 @@ export default function TenantsPage() {
           eyebrow="Tenant resources"
           title="What you need to know as a resident."
         />
-        <RevealGroup className="mt-14 grid gap-5 lg:grid-cols-2" step={70}>
+        <RevealGroup className="mt-14 grid auto-rows-fr gap-5 lg:grid-cols-2" step={70}>
           {RESOURCES.map(({ icon: Icon, title, body }) => (
-            <article key={title} className="card-base p-7">
+            <article key={title} className="card-base flex h-full flex-col p-7">
               <div className="flex items-start gap-5">
                 <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-accent">
                   <Icon className="h-5 w-5" />
@@ -140,7 +140,7 @@ export default function TenantsPage() {
           title="We uphold them."
           intro="We operate within the full framework of Sharjah and UAE tenancy law. As a tenant with us, you are entitled to:"
         />
-        <ul className="mt-12 grid gap-3 lg:grid-cols-2">
+        <ul className="mt-12 grid auto-rows-fr gap-3 lg:grid-cols-2">
           {RIGHTS.map((r) => (
             <li
               key={r}

@@ -97,9 +97,9 @@ export default function WhyUsPage() {
           eyebrow="The core differences"
           title="What makes us different from everyone else."
         />
-        <RevealGroup className="mt-14 grid gap-5 lg:grid-cols-2" step={80}>
+        <RevealGroup className="mt-14 grid auto-rows-fr gap-5 lg:grid-cols-2" step={80}>
           {DIFFS.map((d, i) => (
-            <article key={d.title} className="card-base p-8">
+            <article key={d.title} className="card-base flex h-full flex-col p-8">
               <div className="flex items-start gap-6">
                 <span
                   className="font-serif text-3xl text-gradient leading-none"
@@ -183,9 +183,9 @@ export default function WhyUsPage() {
           eyebrow="What our long-term tenants say"
           title="Decades of trust — in their words."
         />
-        <RevealGroup className="mt-14 grid gap-6 lg:grid-cols-3" step={90}>
+        <RevealGroup className="mt-14 grid auto-rows-fr gap-6 lg:grid-cols-3" step={90}>
           {TESTIMONIALS.map((t) => (
-            <figure key={t.author} className="card-base p-8 flex flex-col">
+            <figure key={t.author} className="card-base flex h-full flex-col p-8">
               <blockquote
                 className="font-serif text-lg leading-snug text-balance"
                 style={{ fontFamily: "var(--font-eb-garamond)" }}

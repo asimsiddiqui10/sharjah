@@ -103,23 +103,27 @@ export default function HomePage() {
           Two identically-composed images stacked; only opacity swaps
           on theme change so nothing moves visually. */}
       <section className="relative isolate min-h-screen w-full overflow-hidden">
-        {/* Skyline images — identical positions, theme-swapped via opacity */}
+        {/* Skyline images — identical positions, theme-swapped via opacity.
+            ThemeTransition crossfades them with WAAPI on theme change so the
+            swap is gradual while everything else snaps. */}
         <div aria-hidden className="absolute inset-0 -z-20">
           <Image
+            data-skyline="light"
             src="/images/sharjah-skyline-light.png"
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center transition-opacity duration-500 ease-out dark:opacity-0"
+            className="object-cover object-center dark:opacity-0"
           />
           <Image
+            data-skyline="dark"
             src="/images/sharjah-skyline-dark.png"
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center opacity-0 transition-opacity duration-500 ease-out dark:opacity-100"
+            className="object-cover object-center opacity-0 dark:opacity-100"
           />
         </div>
 
@@ -190,7 +194,7 @@ export default function HomePage() {
           intro="We don't just manage properties — we built this portfolio unit by unit, and we've been perfecting the way we look after it ever since."
         />
         <RevealGroup
-          className="mt-14 grid grid-cols-2 gap-6 sm:gap-10 lg:grid-cols-4"
+          className="mt-14 grid auto-rows-fr grid-cols-2 gap-6 sm:gap-10 lg:grid-cols-4"
           step={80}
         >
           {STATS.map((stat) => (
@@ -217,13 +221,13 @@ export default function HomePage() {
           intro="When you rent from us, you're dealing directly with the owner's team — not an agent, not a middleman, not a call centre. You get real answers, fast responses, and a team that takes pride in where you live."
         />
         <RevealGroup
-          className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-3"
           step={70}
         >
           {FEATURES.map(({ icon: Icon, title, body, highlight }) => (
             <article
               key={title}
-              className={`${highlight ? "card-gradient" : "card-base"} p-7`}
+              className={`${highlight ? "card-gradient" : "card-base"} flex h-full flex-col p-7`}
             >
               <div className="relative icon-chip">
                 <Icon className="h-5 w-5" />
@@ -312,11 +316,11 @@ export default function HomePage() {
         />
         <RevealGroup
           as="ol"
-          className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-5"
+          className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-5"
           step={70}
         >
           {STEPS.map((step) => (
-            <li key={step.n} className="card-base p-7">
+            <li key={step.n} className="card-base flex h-full flex-col p-7">
               <div className="flex items-center gap-3">
                 <span
                   className="font-serif text-2xl text-gradient"
@@ -347,11 +351,11 @@ export default function HomePage() {
           title="Decades of trust — in their words."
         />
         <RevealGroup
-          className="mt-14 grid gap-6 lg:grid-cols-3"
+          className="mt-14 grid auto-rows-fr gap-6 lg:grid-cols-3"
           step={90}
         >
           {TESTIMONIALS.map((t) => (
-            <figure key={t.author} className="card-base p-8 flex flex-col">
+            <figure key={t.author} className="card-base flex h-full flex-col p-8">
               <Clock4 className="h-4 w-4 text-brand-500 dark:text-brand-accent" />
               <blockquote
                 className="font-serif mt-6 text-xl leading-snug text-balance"

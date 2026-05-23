@@ -65,12 +65,12 @@ export default function ContactPage() {
 
       {/* CONTACT CARDS */}
       <Section className="pt-0 sm:pt-0">
-        <div className="grid gap-5 lg:grid-cols-3">
+        <div className="grid auto-rows-fr gap-5 lg:grid-cols-3">
           {CONTACT_CARDS.map(({ icon: Icon, title, primary, secondary, href }) => (
             <a
               key={title}
               href={href}
-              className="card-base group p-7 transition-transform hover:-translate-y-0.5"
+              className="card-base group flex h-full flex-col p-7 transition-transform hover:-translate-y-0.5"
             >
               <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-accent">
                 <Icon className="h-5 w-5" />

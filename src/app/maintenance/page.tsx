@@ -108,7 +108,7 @@ export default function MaintenancePage() {
           title="Every trade. Every task. In-house."
         />
         <RevealGroup
-          className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-4"
           step={60}
         >
           {TRADES.map(({ icon: Icon, title, body }, i) => {
@@ -117,7 +117,7 @@ export default function MaintenancePage() {
             return (
               <article
                 key={title}
-                className={`${isHighlight ? "card-gradient" : "card-base"} p-7`}
+                className={`${isHighlight ? "card-gradient" : "card-base"} flex h-full flex-col p-7`}
               >
                 <div className="relative icon-chip">
                   <Icon className="h-5 w-5" />
@@ -149,11 +149,11 @@ export default function MaintenancePage() {
         />
         <RevealGroup
           as="ol"
-          className="mt-14 grid gap-5 lg:grid-cols-5"
+          className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-5"
           step={70}
         >
           {PROCESS.map((step, i) => (
-            <li key={step.title} className="card-base p-6">
+            <li key={step.title} className="card-base flex h-full flex-col p-6">
               <div className="flex items-center gap-3">
                 <span
                   className="font-serif text-2xl text-gradient"
@@ -232,11 +232,11 @@ export default function MaintenancePage() {
           intro="Our Planned Preventive Maintenance programme runs year-round across all 750 units and common areas. This is how older buildings stay in excellent condition — not by reacting to problems, but by preventing them."
         />
         <RevealGroup
-          className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-12 grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-3"
           step={50}
         >
           {CALENDAR.map(([month, activity]) => (
-            <div key={month} className="card-base p-5">
+            <div key={month} className="card-base flex h-full flex-col p-5">
               <div className="text-xs uppercase tracking-[0.16em] text-brand-600 dark:text-brand-accent">
                 {month}
               </div>

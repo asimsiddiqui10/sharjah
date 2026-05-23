@@ -113,9 +113,9 @@ export default function PropertiesPage() {
           title="Not just managed. Owner-cared."
           intro="When a company owns its own portfolio — rather than managing it on behalf of outside owners — the standard changes. We invest in our buildings because they're ours."
         />
-        <RevealGroup className="mt-14 grid gap-5 sm:grid-cols-2" step={80}>
+        <RevealGroup className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2" step={80}>
           {DIFFERENTIATORS.map((d) => (
-            <article key={d.title} className="card-base p-7">
+            <article key={d.title} className="card-base flex h-full flex-col p-7">
               <h3
                 className="font-serif text-xl tracking-tight"
                 style={{ fontFamily: "var(--font-eb-garamond)" }}
@@ -136,9 +136,9 @@ export default function PropertiesPage() {
           eyebrow="Unit types available"
           title="Find your home."
         />
-        <RevealGroup className="mt-14 grid gap-5 lg:grid-cols-2" step={80}>
+        <RevealGroup className="mt-14 grid auto-rows-fr gap-5 lg:grid-cols-2" step={80}>
           {UNITS.map((u) => (
-            <article key={u.type} className="card-base p-8">
+            <article key={u.type} className="card-base flex h-full flex-col p-8">
               <div className="flex items-start justify-between gap-4">
                 <h3
                   className="font-serif text-2xl tracking-tight"
@@ -169,7 +169,7 @@ export default function PropertiesPage() {
           eyebrow="Building features"
           title="What every building offers."
         />
-        <ul className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-12 grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map(({ icon: Icon, label }) => (
             <li
               key={label}
