@@ -15,6 +15,8 @@ export function Section({
       id={id}
       className={cn(
         "mx-auto w-full max-w-6xl px-6 py-20 sm:py-28",
+        // Anchored sections need to clear the fixed navbar when scrolled to.
+        id && "scroll-mt-24",
         className
       )}
     >

@@ -3,17 +3,6 @@
 import { useState } from "react";
 import { Send, CheckCircle2 } from "lucide-react";
 
-const ENQUIRY_TYPES = [
-  "Leasing enquiry",
-  "Maintenance request",
-  "General question",
-  "Tenancy",
-  "Complaint",
-  "Other",
-];
-
-const CONTACT_METHODS = ["Phone", "WhatsApp", "Email"] as const;
-
 const inputClass =
   "mt-2 w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm placeholder:text-muted-foreground/70 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20 transition-colors";
 
@@ -87,17 +76,6 @@ export function ContactForm() {
           />
         </label>
         <label className="block sm:col-span-2">
-          <span className="text-sm font-medium">Enquiry type</span>
-          <select name="type" defaultValue="" className={inputClass}>
-            <option value="" disabled>
-              Select an enquiry type
-            </option>
-            {ENQUIRY_TYPES.map((t) => (
-              <option key={t}>{t}</option>
-            ))}
-          </select>
-        </label>
-        <label className="block sm:col-span-2">
           <span className="text-sm font-medium">Message *</span>
           <textarea
             required
@@ -108,27 +86,6 @@ export function ContactForm() {
           />
         </label>
       </div>
-
-      <fieldset>
-        <legend className="text-sm font-medium">Preferred contact method</legend>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {CONTACT_METHODS.map((m, i) => (
-            <label
-              key={m}
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm has-[input:checked]:border-brand-400 has-[input:checked]:bg-brand-50 has-[input:checked]:text-brand-700 dark:has-[input:checked]:bg-brand-900/30 dark:has-[input:checked]:text-brand-accent transition-colors cursor-pointer"
-            >
-              <input
-                type="radio"
-                name="contact-method"
-                value={m}
-                defaultChecked={i === 0}
-                className="sr-only"
-              />
-              {m}
-            </label>
-          ))}
-        </div>
-      </fieldset>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-muted-foreground">

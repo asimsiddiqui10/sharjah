@@ -1,21 +1,39 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
   ArrowRight,
+  ArrowUpRight,
+  AirVent,
+  Banknote,
+  Brush,
   Building2,
-  CheckCircle2,
+  Camera,
+  CalendarDays,
+  Car,
+  ClipboardCheck,
+  ClipboardList,
+  Clock,
   Clock4,
+  Cog,
+  Droplets,
+  FileText,
+  Hammer,
+  Home,
   KeyRound,
-  MessageSquare,
+  Leaf,
+  Lock,
+  Mail,
+  MapPin,
+  Phone,
+  PhoneCall,
+  Plug,
+  ShieldCheck,
+  Store,
   Users,
   Wrench,
-  CalendarDays,
-  ShieldCheck,
-  FileText,
-  MapPin,
 } from "lucide-react";
 import { Section, SectionHeader } from "@/components/section";
-import { CtaBanner } from "@/components/cta-banner";
+import { FaqAccordion } from "@/components/faq-accordion";
+import { ContactForm } from "@/components/contact-form";
 import { Reveal, RevealGroup } from "@/components/reveal";
 
 const STATS = [
@@ -25,11 +43,18 @@ const STATS = [
   { value: "24/7", label: "Maintenance response" },
 ];
 
-const FEATURES = [
+const TRUST_BADGES = [
+  { icon: Building2, label: "750+ Residential units" },
+  { icon: CalendarDays, label: "40+ Years in Sharjah" },
+  { icon: ShieldCheck, label: "100% In-house management" },
+  { icon: ClipboardCheck, label: "Ejari registered" },
+];
+
+const WHY_US = [
   {
     icon: Building2,
-    title: "Owner-managed properties",
-    body: "Every unit is owned and operated by us. There's no third-party landlord chain — when you have a question, you talk to the people accountable.",
+    title: "We own what we manage",
+    body: "Every unit is owned and operated by us — no agents, no middlemen, no landlord chain. One point of accountability for everything.",
   },
   {
     icon: Wrench,
@@ -39,61 +64,191 @@ const FEATURES = [
   },
   {
     icon: FileText,
-    title: "Transparent lease process",
-    body: "Clear tenancy agreements, Ejari-registered contracts, documented deposits, and no hidden fees. Straightforward from day one.",
-  },
-  {
-    icon: MapPin,
-    title: "40 years of Sharjah knowledge",
-    body: "We know this city, its communities, its regulations, and its rental market inside-out. Better-managed buildings, smoother experience.",
+    title: "Transparent & compliant",
+    body: "Ejari-registered contracts, RERA-compliant renewals, documented deposits, and no hidden fees — straightforward from day one.",
   },
   {
     icon: Users,
-    title: "A team that knows your name",
-    body: "Our on-ground management team is present, accessible, and responsive. You won't be chasing voicemails — you'll speak to someone who knows your building.",
-  },
-  {
-    icon: MessageSquare,
-    title: "Simple, modern communication",
-    body: "Reach us by phone, WhatsApp, or the tenant portal. Log requests, view lease documents, raise a concern — all in one place.",
+    title: "Long-term relationships",
+    body: "Many tenants have stayed a decade or more; some families for two generations. We think in relationships, not lease cycles.",
   },
 ];
 
-const STEPS = [
-  { n: 1, title: "Enquire", body: "Contact us directly — by phone, WhatsApp, or through this site. No agents, no fees for enquiries." },
-  { n: 2, title: "View the unit", body: "We'll arrange a viewing at your convenience. Our team walks you through the property honestly." },
-  { n: 3, title: "Sign & register", body: "Clear tenancy agreement, registered on Ejari — fully compliant with Sharjah and UAE regulations." },
-  { n: 4, title: "Move in", body: "Receive your keys with a documented handover. Our team is available from day one." },
-  { n: 5, title: "We're here throughout", body: "For the life of your tenancy, our management and maintenance teams are a call or message away." },
+const SERVICES = [
+  {
+    icon: KeyRound,
+    title: "Residential leasing",
+    body: "Viewings, clear tenancy agreements, Ejari registration, and documented move-in handovers — with direct pricing and no agent commission.",
+  },
+  {
+    icon: ClipboardList,
+    title: "Tenancy management",
+    body: "Renewals, RERA-compliant rent reviews, documentation, and escalations — handled by a team that knows your file.",
+  },
+  {
+    icon: Cog,
+    title: "Preventive maintenance",
+    body: "A year-round PPM programme — AC servicing, elevator certification, fire systems, plumbing and electrical checks — so things don't break in the first place.",
+  },
+  {
+    icon: Building2,
+    title: "Facilities & common areas",
+    body: "Daily cleaning, landscaping, lighting, waste management, and pool upkeep — shared spaces held to the same standard as the units.",
+  },
+  {
+    icon: Lock,
+    title: "On-site security",
+    body: "Directly employed security staff, CCTV monitoring, and access control — integrated with our management team, familiar with every resident.",
+  },
+  {
+    icon: Banknote,
+    title: "Finance & rent",
+    body: "Rent collection, post-dated cheques, deposits held per UAE law, and VAT-compliant invoicing — all in-house and fully transparent.",
+  },
+];
+
+const UNITS = [
+  { type: "Studio", size: "from 350 sq ft", body: "Efficient, well-planned units with fitted kitchens and independent SEWA meters." },
+  { type: "1 Bedroom", size: "from 600 sq ft", body: "Our most popular layout — many with balconies and built-in wardrobes." },
+  { type: "2 Bedroom", size: "from 900 sq ft", body: "Spacious family apartments with generous living areas; some with maid's rooms." },
+  { type: "3 Bedroom", size: "from 1,200 sq ft", body: "Our largest configuration — full-size rooms, two bathrooms, ample storage." },
+];
+
+const BUILDING_FEATURES = [
+  { icon: ShieldCheck, label: "24-hour security" },
+  { icon: Camera, label: "CCTV in common areas" },
+  { icon: Car, label: "Parking" },
+  { icon: ClipboardCheck, label: "Certified elevators" },
+  { icon: Leaf, label: "Pest control" },
+  { icon: Droplets, label: "Direct SEWA connection" },
+];
+
+const TRADES = [
+  { icon: AirVent, label: "Air conditioning" },
+  { icon: Droplets, label: "Plumbing" },
+  { icon: Plug, label: "Electrical" },
+  { icon: Hammer, label: "Carpentry & joinery" },
+  { icon: Brush, label: "Painting & finishing" },
+  { icon: Leaf, label: "Pest control" },
+  { icon: Cog, label: "Building systems" },
+  { icon: Wrench, label: "General repairs" },
 ];
 
 const TESTIMONIALS = [
   {
     quote:
-      "I've been a tenant for eleven years and have no intention of leaving. Every maintenance issue gets sorted the same week — usually the same day. I've never had to chase anyone.",
+      "I've been a tenant for eleven years and have no intention of leaving. Every maintenance issue gets sorted the same week — usually the same day.",
     author: "Ahmed K.",
     role: "Tenant — 11 years",
   },
   {
     quote:
-      "When I first moved to Sharjah, I was nervous about the tenancy process. Their team walked me through every step, and I was moved in within a week. It felt like dealing with family, not a company.",
+      "Their team walked me through every step, and I was moved in within a week. It felt like dealing with family, not a company.",
     author: "Priya M.",
     role: "Tenant — 3 years",
   },
   {
     quote:
-      "The building is always clean, common areas are well-lit, and the security team knows every resident by name. It's the small things that make the difference — and they get all of them right.",
+      "The building is always clean, common areas are well-lit, and the security team knows every resident by name. They get the small things right.",
     author: "Mohammed Al R.",
     role: "Tenant — 7 years",
   },
 ];
 
-const TRUST_BADGES = [
-  { icon: Building2, label: "750+ Residential units" },
-  { icon: ShieldCheck, label: "100% In-house management" },
-  { icon: CalendarDays, label: "40+ Years in Sharjah" },
-  { icon: Wrench, label: "24/7 Maintenance team" },
-  { icon: CheckCircle2, label: "Ejari registered" },
+const FAQ = [
+  {
+    q: "Do you charge agent fees for leasing?",
+    a: "No. We own and manage our own portfolio, so there is no agent involved and no commission charged to tenants. What you see is what you pay.",
+  },
+  {
+    q: "How is my rent set, and how are increases handled?",
+    a: "Rent follows current Sharjah market rates. Any increase at renewal is applied strictly per the RERA rent index and communicated in writing at least 90 days before your lease expires.",
+  },
+  {
+    q: "Are all your contracts registered on Ejari?",
+    a: "Yes. Every tenancy agreement is registered on Ejari as required by Sharjah's Real Estate Registration Department, and you receive your certificate at onboarding.",
+  },
+  {
+    q: "What happens if I have a maintenance issue?",
+    a: "Log it by phone, WhatsApp, or the tenant portal. Requests are acknowledged within 4 hours; standard issues are resolved within 48 hours, and emergencies are same-day priorities.",
+  },
+  {
+    q: "How does the security deposit work?",
+    a: "Your deposit is held in compliance with UAE tenancy law. At move-out we conduct a documented handover inspection; any deductions are itemised and agreed in writing, and the balance is returned promptly.",
+  },
+  {
+    q: "What if I need to leave before my lease ends?",
+    a: "Contact our management team as soon as you know. Depending on your contract, options include mutual termination, lease assignment, or a standard notice arrangement.",
+  },
+];
+
+// ——— Contact channels — edit the values below when the real links are ready ———
+const WHATSAPP_NUMBER = "971500000000"; // full international number, no "+", spaces, or dashes
+const CONTACT_EMAIL = "info@almajazalkhleej.ae";
+const BAYUT_URL = "https://www.bayut.com/"; // replace with agency/listing URL
+const DUBIZZLE_URL = "https://dubai.dubizzle.com/"; // replace with agency/listing URL
+
+const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  "Hi, I am interested in your property from your website."
+)}`;
+const EMAIL_LINK = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+  "Property Inquiry"
+)}&body=${encodeURIComponent(
+  "Hi,\n\nI am interested in one of your properties. Please share more details.\n\nThanks"
+)}`;
+
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  );
+}
+
+const CHANNELS = [
+  {
+    key: "whatsapp",
+    title: "WhatsApp",
+    secondary: "Chat with us — replies within 2 hours",
+    href: WHATSAPP_LINK,
+    external: true,
+    icon: WhatsAppIcon,
+    iconClass: "bg-[#25D366]/15 text-[#128C4A] dark:bg-[#25D366]/20 dark:text-[#4AD97D]",
+  },
+  {
+    key: "email",
+    title: "Email us",
+    secondary: CONTACT_EMAIL,
+    href: EMAIL_LINK,
+    external: false,
+    icon: Mail,
+    iconClass: "bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-accent",
+  },
+  {
+    key: "bayut",
+    title: "View on Bayut",
+    secondary: "Browse our live listings",
+    href: BAYUT_URL,
+    external: true,
+    icon: Home,
+    iconClass: "bg-[#28B16D]/15 text-[#1E8A54] dark:bg-[#28B16D]/20 dark:text-[#4FCB8D]",
+  },
+  {
+    key: "dubizzle",
+    title: "View on Dubizzle",
+    secondary: "Browse our live listings",
+    href: DUBIZZLE_URL,
+    external: true,
+    icon: Store,
+    iconClass: "bg-[#EF3E23]/12 text-[#C42E17] dark:bg-[#EF3E23]/20 dark:text-[#F97316]",
+  },
+];
+
+const HOURS = [
+  ["Sunday – Thursday", "8:00 AM – 6:00 PM"],
+  ["Saturday", "9:00 AM – 1:00 PM"],
+  ["Friday", "Closed"],
+  ["Emergency line", "24/7"],
 ];
 
 export default function HomePage() {
@@ -102,10 +257,7 @@ export default function HomePage() {
       {/* HERO — full-bleed 100vh skyline as background.
           Two identically-composed images stacked; only opacity swaps
           on theme change so nothing moves visually. */}
-      <section className="relative isolate min-h-screen w-full overflow-hidden">
-        {/* Skyline images — identical positions, theme-swapped via opacity.
-            ThemeTransition crossfades them with WAAPI on theme change so the
-            swap is gradual while everything else snaps. */}
+      <section id="top" className="relative isolate min-h-screen w-full overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-20">
           <Image
             data-skyline="light"
@@ -127,9 +279,7 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Readability scrim — denser on the left where text sits,
-            lighter on the right so the skyline stays visible.
-            A second bottom fade dissolves the image into the next section. */}
+        {/* Readability scrim — denser on the left where text sits. */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-background/85 via-background/35 to-background/0"
@@ -156,19 +306,19 @@ export default function HomePage() {
             <Reveal delay={160}>
               <p className="mt-7 max-w-2xl text-lg text-foreground/80 leading-relaxed">
                 We own, manage, and maintain 750 residential units across Sharjah —
-                with every team member, every technician, and every decision under one roof.
+                every team member and every decision under one roof.
               </p>
             </Reveal>
 
             <Reveal delay={240}>
               <div className="mt-9 flex flex-wrap gap-3">
-                <Link href="/properties" className="btn btn-primary">
+                <a href="#properties" className="btn btn-primary">
                   View available units
                   <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link href="/contact" className="btn btn-secondary">
+                </a>
+                <a href="#contact" className="btn btn-secondary">
                   Talk to our team
-                </Link>
+                </a>
               </div>
             </Reveal>
 
@@ -186,12 +336,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* STATS */}
-      <Section className="pt-4 sm:pt-8">
+      {/* ABOUT — stats + condensed story */}
+      <Section id="about" className="pt-4 sm:pt-8">
         <SectionHeader
-          eyebrow="The numbers that speak for us"
+          eyebrow="About us"
           title="A track record built over a lifetime."
-          intro="We don't just manage properties — we built this portfolio unit by unit, and we've been perfecting the way we look after it ever since."
         />
         <RevealGroup
           className="mt-14 grid auto-rows-fr grid-cols-2 gap-6 sm:gap-10 lg:grid-cols-4"
@@ -207,24 +356,26 @@ export default function HomePage() {
           ))}
         </RevealGroup>
         <div className="hairline mt-16" />
-        <p className="mt-10 max-w-2xl text-base text-muted-foreground leading-relaxed">
-          One owner. One vision. Direct accountability. Every decision flows
-          through the same team you&apos;ll meet on the ground.
+        <p className="mt-10 max-w-3xl text-base text-muted-foreground leading-relaxed">
+          Founded in Sharjah in 1984 on a simple principle: own the properties,
+          manage them directly, maintain them properly, and treat every tenant as
+          a long-term relationship. Four decades later, that principle hasn&apos;t
+          changed — 750 units across the city&apos;s most established
+          neighbourhoods, run by one owner, one team, one standard.
         </p>
       </Section>
 
-      {/* WHY TENANTS CHOOSE US */}
-      <Section>
+      {/* WHY US */}
+      <Section id="why-us">
         <SectionHeader
-          eyebrow="Why tenants choose us"
+          eyebrow="Why choose us"
           title="Living here feels different."
-          intro="When you rent from us, you're dealing directly with the owner's team — not an agent, not a middleman, not a call centre. You get real answers, fast responses, and a team that takes pride in where you live."
         />
         <RevealGroup
-          className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-4"
           step={70}
         >
-          {FEATURES.map(({ icon: Icon, title, body, highlight }) => (
+          {WHY_US.map(({ icon: Icon, title, body, highlight }) => (
             <article
               key={title}
               className={`${highlight ? "card-gradient" : "card-base"} flex h-full flex-col p-7`}
@@ -250,98 +401,117 @@ export default function HomePage() {
         </RevealGroup>
       </Section>
 
-      {/* OUR PROPERTIES TEASER */}
-      <Section>
-        <div className="relative overflow-hidden rounded-3xl border border-border">
-          <Image
-            src="/images/skyline-frame.png"
-            alt="Sharjah skyline framed at sunrise"
-            width={1600}
-            height={900}
-            className="absolute inset-0 h-full w-full object-cover opacity-60 dark:opacity-30"
-          />
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30"
-          />
-          <div className="relative grid gap-10 p-10 sm:p-14 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-            <div className="max-w-xl">
-              <span className="eyebrow">Our properties</span>
-              <h2
-                className="font-serif mt-5 text-balance text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight"
-                style={{ fontFamily: "var(--font-eb-garamond)" }}
-              >
-                750 units. One standard of living.
-              </h2>
-              <p className="mt-5 text-muted-foreground leading-relaxed">
-                Across Sharjah&apos;s most established residential communities, our portfolio
-                offers apartments and family homes that have been maintained, improved,
-                and cared for over decades.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <Link href="/properties" className="btn btn-primary">
-                  Browse available units
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link href="/why-us" className="btn btn-ghost">
-                  See what makes them different
-                </Link>
-              </div>
-            </div>
-            <ul className="space-y-4 text-sm">
-              {[
-                { icon: KeyRound, label: "Studios from 350 sq ft" },
-                { icon: KeyRound, label: "1 BR from 600 sq ft" },
-                { icon: KeyRound, label: "2 BR from 900 sq ft" },
-                { icon: KeyRound, label: "3 BR from 1,200 sq ft" },
-              ].map(({ icon: Icon, label }) => (
-                <li
-                  key={label}
-                  className="flex items-center gap-3 rounded-2xl border border-border bg-card/80 backdrop-blur-sm px-5 py-4"
-                >
-                  <Icon className="h-4 w-4 text-brand-600 dark:text-brand-accent" />
-                  <span>{label}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Section>
-
-      {/* TENANT JOURNEY */}
-      <Section>
+      {/* SERVICES */}
+      <Section id="services">
         <SectionHeader
-          eyebrow="How it works"
-          title="Renting with us is simple."
+          eyebrow="What we do"
+          title="Full-service management, under one roof."
         />
         <RevealGroup
-          as="ol"
-          className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-5"
+          className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-3"
           step={70}
         >
-          {STEPS.map((step) => (
-            <li key={step.n} className="card-base flex h-full flex-col p-7">
-              <div className="flex items-center gap-3">
-                <span
-                  className="font-serif text-2xl text-gradient"
-                  style={{ fontFamily: "var(--font-eb-garamond)" }}
-                >
-                  0{step.n}
-                </span>
-                <span className="h-px flex-1 bg-border" />
+          {SERVICES.map(({ icon: Icon, title, body }) => (
+            <article key={title} className="card-base flex h-full flex-col p-7">
+              <div className="relative icon-chip">
+                <Icon className="h-5 w-5" />
               </div>
               <h3
-                className="font-serif mt-6 text-lg tracking-tight"
+                className="font-serif mt-5 text-xl tracking-tight"
                 style={{ fontFamily: "var(--font-eb-garamond)" }}
               >
-                {step.title}
+                {title}
               </h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                {step.body}
+                {body}
               </p>
-            </li>
+            </article>
           ))}
         </RevealGroup>
+      </Section>
+
+      {/* PROPERTIES */}
+      <Section id="properties">
+        <SectionHeader
+          eyebrow="Our properties"
+          title="750 units. One standard of living."
+          intro="Studios to family apartments across Sharjah's most established, well-connected communities — maintained and improved over decades."
+        />
+        <RevealGroup
+          className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          step={70}
+        >
+          {UNITS.map((u) => (
+            <article key={u.type} className="card-base flex h-full flex-col p-7">
+              <div className="flex items-start justify-between gap-3">
+                <h3
+                  className="font-serif text-xl tracking-tight"
+                  style={{ fontFamily: "var(--font-eb-garamond)" }}
+                >
+                  {u.type}
+                </h3>
+                <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground whitespace-nowrap">
+                  {u.size}
+                </span>
+              </div>
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                {u.body}
+              </p>
+            </article>
+          ))}
+        </RevealGroup>
+        <ul className="mt-8 flex flex-wrap gap-2.5">
+          {BUILDING_FEATURES.map(({ icon: Icon, label }) => (
+            <li
+              key={label}
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-2 text-sm text-foreground/85"
+            >
+              <Icon className="h-3.5 w-3.5 text-brand-600 dark:text-brand-accent" />
+              {label}
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      {/* MAINTENANCE */}
+      <Section id="maintenance">
+        <SectionHeader
+          eyebrow="In-house maintenance"
+          title="Every trade. Every task. In-house."
+          intro="Requests are acknowledged within 4 hours and standard jobs completed within 48 — because our maintenance crew works for us, not for a contractor."
+        />
+        <ul className="mt-12 flex flex-wrap gap-2.5">
+          {TRADES.map(({ icon: Icon, label }) => (
+            <li
+              key={label}
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-2 text-sm text-foreground/85"
+            >
+              <Icon className="h-3.5 w-3.5 text-brand-600 dark:text-brand-accent" />
+              {label}
+            </li>
+          ))}
+        </ul>
+        <div className="card-base mt-10 flex flex-col gap-6 p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
+          <div>
+            <h3
+              className="font-serif text-2xl tracking-tight"
+              style={{ fontFamily: "var(--font-eb-garamond)" }}
+            >
+              When it can&apos;t wait.
+            </h3>
+            <p className="mt-2 max-w-xl text-sm text-muted-foreground leading-relaxed">
+              Power failure, a burst pipe, AC down in summer — our emergency line
+              is answered 24 hours a day, every day of the year.
+            </p>
+          </div>
+          <a
+            href="tel:8001099"
+            className="inline-flex shrink-0 items-center gap-3 rounded-2xl border border-brand-400/30 bg-brand-50/60 px-5 py-4 text-sm font-medium text-brand-700 dark:bg-brand-900/40 dark:text-brand-accent dark:border-brand-700/40"
+          >
+            <PhoneCall className="h-4 w-4" />
+            24/7 emergency — 800 1099
+          </a>
+        </div>
       </Section>
 
       {/* TESTIMONIALS */}
@@ -372,35 +542,120 @@ export default function HomePage() {
         </RevealGroup>
       </Section>
 
-      {/* SHARJAH COMMUNITY */}
-      <Section>
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
-          <div>
-            <span className="eyebrow">Sharjah community</span>
-            <h2
-              className="font-serif mt-5 text-balance text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight"
-              style={{ fontFamily: "var(--font-eb-garamond)" }}
-            >
-              Proudly rooted in Sharjah.
-            </h2>
-          </div>
-          <p className="text-muted-foreground leading-relaxed text-lg">
-            Sharjah is more than the location of our portfolio — it is where our
-            company was founded, where our team lives and works, and where we have
-            invested in the community for over four decades. We understand Sharjah&apos;s
-            residential culture, its family values, and its standards deeply.
-            That understanding shapes every decision we make.
-          </p>
-        </div>
+      {/* FAQ */}
+      <Section id="faq">
+        <SectionHeader
+          eyebrow="Frequently asked questions"
+          title="Answers to what residents ask most."
+        />
+        <Reveal className="mt-12">
+          <FaqAccordion items={FAQ} />
+        </Reveal>
       </Section>
 
-      <CtaBanner
-        title="Looking for a home in Sharjah?"
-        body="Speak directly with our leasing team. No agents, no fees, no runaround."
-        primaryLabel="Contact us today"
-        secondaryHref="/properties"
-        secondaryLabel="View available units"
-      />
+      {/* CONTACT */}
+      <Section id="contact">
+        <SectionHeader
+          eyebrow="Get in touch"
+          title="Talk to the people who run this place."
+          intro="No switchboards, no ticket queues. When you contact us, you speak to our team directly."
+        />
+        <RevealGroup
+          className="mt-12 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          step={70}
+        >
+          {CHANNELS.map(({ key, icon: Icon, iconClass, title, secondary, href, external }) => (
+            <a
+              key={key}
+              href={href}
+              {...(external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              className="card-base group flex h-full items-center gap-4 p-5 transition-transform hover:-translate-y-0.5"
+            >
+              <span
+                className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${iconClass}`}
+              >
+                <Icon className="h-5 w-5" />
+              </span>
+              <span className="min-w-0">
+                <span className="flex items-center gap-1.5 font-medium text-sm">
+                  {title}
+                  <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+                <span className="mt-0.5 block truncate text-xs text-muted-foreground">
+                  {secondary}
+                </span>
+              </span>
+            </a>
+          ))}
+        </RevealGroup>
+
+        <div className="mt-14 grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-start">
+          <ContactForm />
+
+          <aside className="space-y-6">
+            <a
+              href="tel:8001099"
+              className="card-base flex items-center gap-4 p-7 transition-transform hover:-translate-y-0.5"
+            >
+              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-accent">
+                <Phone className="h-5 w-5" />
+              </span>
+              <span>
+                <span className="block text-sm text-muted-foreground">
+                  Prefer to talk? Call toll free
+                </span>
+                <span
+                  className="font-serif mt-0.5 block text-2xl tracking-tight"
+                  style={{ fontFamily: "var(--font-eb-garamond)" }}
+                >
+                  800 1099
+                </span>
+              </span>
+            </a>
+
+            <div className="card-base p-7">
+              <div className="flex items-center gap-3">
+                <MapPin className="h-5 w-5 text-brand-600 dark:text-brand-accent" />
+                <h3
+                  className="font-serif text-xl tracking-tight"
+                  style={{ fontFamily: "var(--font-eb-garamond)" }}
+                >
+                  Office address
+                </h3>
+              </div>
+              <address className="mt-4 not-italic text-sm text-muted-foreground leading-relaxed">
+                Al Majaz Al Khleej Facility Management LLC
+                <br />
+                Al Majaz, Sharjah
+                <br />
+                United Arab Emirates
+              </address>
+            </div>
+
+            <div className="card-base p-7">
+              <div className="flex items-center gap-3">
+                <Clock className="h-5 w-5 text-brand-600 dark:text-brand-accent" />
+                <h3
+                  className="font-serif text-xl tracking-tight"
+                  style={{ fontFamily: "var(--font-eb-garamond)" }}
+                >
+                  Office hours
+                </h3>
+              </div>
+              <ul className="mt-4 space-y-2 text-sm">
+                {HOURS.map(([day, time]) => (
+                  <li key={day} className="flex items-center justify-between gap-4">
+                    <span className="text-muted-foreground">{day}</span>
+                    <span className="font-medium">{time}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </Section>
     </>
   );
 }

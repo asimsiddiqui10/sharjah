@@ -41,7 +41,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${ebGaramond.variable} h-full antialiased`}
+      className={`${inter.variable} ${ebGaramond.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider
