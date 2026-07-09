@@ -25,11 +25,13 @@ export function Footer() {
                 className="h-full w-full object-contain p-0.5"
               />
             </span>
-            <span
-              className="font-serif font-bold text-base leading-none"
-              style={{ fontFamily: "var(--font-eb-garamond)" }}
-            >
-              Al Majaz Al Khleej
+            <span className="flex flex-col">
+              <span className="font-bold text-base leading-none">
+                Al Majaz Al Khleej
+              </span>
+              <span className="mt-0.5 text-[10px] leading-none">
+                Facilities Management LLC
+              </span>
             </span>
           </a>
 
@@ -51,11 +53,11 @@ export function Footer() {
 
         <div className="flex flex-col gap-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} Al Majaz Al Khleej Facility Management
-            LLC. All rights reserved.
+            © {new Date().getFullYear()} Al Majaz Al Khleej Facilities
+            Management LLC. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <span>Toll free: 800 1099</span>
+            <span>Call us: 800 1099</span>
             <span>Ejari registered</span>
             <span>Sharjah, United Arab Emirates</span>
           </div>

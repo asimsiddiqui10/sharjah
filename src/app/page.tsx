@@ -17,7 +17,6 @@ import {
   Droplets,
   FileText,
   Hammer,
-  Home,
   KeyRound,
   Leaf,
   Lock,
@@ -27,7 +26,6 @@ import {
   PhoneCall,
   Plug,
   ShieldCheck,
-  Store,
   Users,
   Wrench,
 } from "lucide-react";
@@ -111,7 +109,12 @@ const UNITS = [
   { type: "Studio", size: "from 350 sq ft", body: "Efficient, well-planned units with fitted kitchens and independent SEWA meters." },
   { type: "1 Bedroom", size: "from 600 sq ft", body: "Our most popular layout — many with balconies and built-in wardrobes." },
   { type: "2 Bedroom", size: "from 900 sq ft", body: "Spacious family apartments with generous living areas; some with maid's rooms." },
-  { type: "3 Bedroom", size: "from 1,200 sq ft", body: "Our largest configuration — full-size rooms, two bathrooms, ample storage." },
+  {
+    type: "3 Bedroom",
+    size: "from 1,200 sq ft",
+    body: "Our flagship family homes — three full-size bedrooms, a generous living and dining area, two bathrooms, and ample storage. Ideal for larger and multi-generational families.",
+    highlight: true,
+  },
 ];
 
 const BUILDING_FEATURES = [
@@ -185,8 +188,9 @@ const FAQ = [
 // ——— Contact channels — edit the values below when the real links are ready ———
 const WHATSAPP_NUMBER = "971500000000"; // full international number, no "+", spaces, or dashes
 const CONTACT_EMAIL = "info@almajazalkhleej.ae";
-const BAYUT_URL = "https://www.bayut.com/"; // replace with agency/listing URL
-const DUBIZZLE_URL = "https://dubai.dubizzle.com/"; // replace with agency/listing URL
+const BAYUT_URL = "https://www.bayut.com/l/BbILZ5ek";
+const DUBIZZLE_URL =
+  "https://uae.dubizzle.com/property-agencies/al-majaz-alkhleej-facilities-management-services-300128/?category_0=property-for-rent&category_1=property-for-rent%2Fresidential";
 
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   "Hi, I am interested in your property from your website."
@@ -205,6 +209,34 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
+// Bayut's app mark — white house on the brand green tile.
+function BayutIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
+      <path d="M12 2.5 2.5 11h2.3v10h5.7v-6.2h3v6.2h5.7V11h2.3L12 2.5z" />
+    </svg>
+  );
+}
+
+// Dubizzle's app mark — white lowercase "d" on the brand red tile.
+function DubizzleIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden className={className}>
+      <text
+        x="12"
+        y="17.5"
+        textAnchor="middle"
+        fontSize="17"
+        fontWeight="700"
+        fontFamily="Arial, Helvetica, sans-serif"
+        fill="currentColor"
+      >
+        d
+      </text>
+    </svg>
+  );
+}
+
 const CHANNELS = [
   {
     key: "whatsapp",
@@ -213,7 +245,7 @@ const CHANNELS = [
     href: WHATSAPP_LINK,
     external: true,
     icon: WhatsAppIcon,
-    iconClass: "bg-[#25D366]/15 text-[#128C4A] dark:bg-[#25D366]/20 dark:text-[#4AD97D]",
+    iconClass: "bg-[#25D366] text-white",
   },
   {
     key: "email",
@@ -222,7 +254,7 @@ const CHANNELS = [
     href: EMAIL_LINK,
     external: false,
     icon: Mail,
-    iconClass: "bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-accent",
+    iconClass: "bg-brand-600 text-white",
   },
   {
     key: "bayut",
@@ -230,8 +262,8 @@ const CHANNELS = [
     secondary: "Browse our live listings",
     href: BAYUT_URL,
     external: true,
-    icon: Home,
-    iconClass: "bg-[#28B16D]/15 text-[#1E8A54] dark:bg-[#28B16D]/20 dark:text-[#4FCB8D]",
+    icon: BayutIcon,
+    iconClass: "bg-[#28B16D] text-white",
   },
   {
     key: "dubizzle",
@@ -239,15 +271,16 @@ const CHANNELS = [
     secondary: "Browse our live listings",
     href: DUBIZZLE_URL,
     external: true,
-    icon: Store,
-    iconClass: "bg-[#EF3E23]/12 text-[#C42E17] dark:bg-[#EF3E23]/20 dark:text-[#F97316]",
+    icon: DubizzleIcon,
+    iconClass: "bg-[#EF3E23] text-white",
   },
 ];
 
 const HOURS = [
-  ["Sunday – Thursday", "8:00 AM – 6:00 PM"],
-  ["Saturday", "9:00 AM – 1:00 PM"],
-  ["Friday", "Closed"],
+  ["Monday – Thursday", "9:00 AM – 6:00 PM"],
+  ["Friday", "2:30 PM – 6:30 PM"],
+  ["Saturday", "9:00 AM – 6:00 PM"],
+  ["Sunday", "Off"],
   ["Emergency line", "24/7"],
 ];
 
@@ -442,19 +475,32 @@ export default function HomePage() {
           step={70}
         >
           {UNITS.map((u) => (
-            <article key={u.type} className="card-base flex h-full flex-col p-7">
-              <div className="flex items-start justify-between gap-3">
+            <article
+              key={u.type}
+              className={`${u.highlight ? "card-gradient" : "card-base"} flex h-full flex-col p-7`}
+            >
+              <div className="relative flex items-start justify-between gap-3">
                 <h3
                   className="font-serif text-xl tracking-tight"
                   style={{ fontFamily: "var(--font-eb-garamond)" }}
                 >
                   {u.type}
                 </h3>
-                <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground whitespace-nowrap">
+                <span
+                  className={`rounded-full border px-3 py-1 text-xs whitespace-nowrap ${
+                    u.highlight
+                      ? "border-white/30 text-white/90"
+                      : "border-border text-muted-foreground"
+                  }`}
+                >
                   {u.size}
                 </span>
               </div>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+              <p
+                className={`relative mt-3 text-sm leading-relaxed ${
+                  u.highlight ? "text-white/85" : "text-muted-foreground"
+                }`}
+              >
                 {u.body}
               </p>
             </article>
@@ -604,7 +650,7 @@ export default function HomePage() {
               </span>
               <span>
                 <span className="block text-sm text-muted-foreground">
-                  Prefer to talk? Call toll free
+                  Call us
                 </span>
                 <span
                   className="font-serif mt-0.5 block text-2xl tracking-tight"
@@ -626,7 +672,7 @@ export default function HomePage() {
                 </h3>
               </div>
               <address className="mt-4 not-italic text-sm text-muted-foreground leading-relaxed">
-                Al Majaz Al Khleej Facility Management LLC
+                Al Majaz Al Khleej Facilities Management LLC
                 <br />
                 Al Majaz, Sharjah
                 <br />

@@ -81,8 +81,13 @@ export function Navbar() {
               priority
             />
           </span>
-          <span className="font-bold text-[13px] sm:text-sm tracking-tight leading-none whitespace-nowrap">
-            Al Majaz Al Khleej
+          <span className="flex flex-col">
+            <span className="font-bold text-[13px] sm:text-sm tracking-tight leading-none whitespace-nowrap">
+              Al Majaz Al Khleej
+            </span>
+            <span className="mt-0.5 text-[9px] sm:text-[10px] tracking-tight leading-none whitespace-nowrap">
+              Facilities Management LLC
+            </span>
           </span>
         </a>
 
