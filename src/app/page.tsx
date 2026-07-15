@@ -58,7 +58,6 @@ const WHY_US = [
     icon: Wrench,
     title: "In-house maintenance team",
     body: "Our full-time crew handles everything from a dripping tap to a full AC overhaul — no contractor delays, no job queues, no excuses.",
-    highlight: true,
   },
   {
     icon: FileText,
@@ -113,7 +112,6 @@ const UNITS = [
     type: "3 Bedroom",
     size: "from 1,200 sq ft",
     body: "Our flagship family homes — three full-size bedrooms, a generous living and dining area, two bathrooms, and ample storage. Ideal for larger and multi-generational families.",
-    highlight: true,
   },
 ];
 
@@ -338,7 +336,7 @@ export default function HomePage() {
             </Reveal>
             <Reveal delay={160}>
               <p className="mt-7 max-w-2xl text-lg text-foreground/80 leading-relaxed">
-                We own, manage, and maintain 750 residential units across Sharjah —
+                We own, manage, and maintain 750+ residential units across Sharjah —
                 every team member and every decision under one roof.
               </p>
             </Reveal>
@@ -413,10 +411,10 @@ export default function HomePage() {
           className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-4"
           step={70}
         >
-          {WHY_US.map(({ icon: Icon, title, body, highlight }) => (
+          {WHY_US.map(({ icon: Icon, title, body }) => (
             <article
               key={title}
-              className={`${highlight ? "card-gradient" : "card-base"} flex h-full flex-col p-7`}
+              className="card-base flex h-full flex-col p-7"
             >
               <div className="relative icon-chip">
                 <Icon className="h-5 w-5" />
@@ -427,11 +425,7 @@ export default function HomePage() {
               >
                 {title}
               </h3>
-              <p
-                className={`mt-3 text-sm leading-relaxed relative ${
-                  highlight ? "text-white/85" : "text-muted-foreground"
-                }`}
-              >
+              <p className="mt-3 text-sm leading-relaxed relative text-muted-foreground">
                 {body}
               </p>
             </article>
@@ -482,7 +476,7 @@ export default function HomePage() {
           {UNITS.map((u) => (
             <article
               key={u.type}
-              className={`${u.highlight ? "card-gradient" : "card-base"} flex h-full flex-col p-7`}
+              className="card-base flex h-full flex-col p-7"
             >
               <div className="relative flex items-start justify-between gap-3">
                 <h3
@@ -491,21 +485,11 @@ export default function HomePage() {
                 >
                   {u.type}
                 </h3>
-                <span
-                  className={`rounded-full border px-3 py-1 text-xs whitespace-nowrap ${
-                    u.highlight
-                      ? "border-white/30 text-white/90"
-                      : "border-border text-muted-foreground"
-                  }`}
-                >
+                <span className="rounded-full border px-3 py-1 text-xs whitespace-nowrap border-border text-muted-foreground">
                   {u.size}
                 </span>
               </div>
-              <p
-                className={`relative mt-3 text-sm leading-relaxed ${
-                  u.highlight ? "text-white/85" : "text-muted-foreground"
-                }`}
-              >
+              <p className="relative mt-3 text-sm leading-relaxed text-muted-foreground">
                 {u.body}
               </p>
             </article>

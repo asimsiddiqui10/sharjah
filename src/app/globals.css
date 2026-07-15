@@ -275,7 +275,9 @@ h3.serif {
   border: 1px solid var(--border-strong);
 }
 .btn-secondary:hover {
-  background: var(--muted);
+  background: var(--brand-600);
+  border-color: transparent;
+  color: #fff;
 }
 .btn-ghost {
   color: var(--foreground);
