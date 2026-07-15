@@ -345,7 +345,12 @@ export default function HomePage() {
 
             <Reveal delay={240}>
               <div className="mt-9 flex flex-wrap gap-3">
-                <a href="#properties" className="btn btn-primary">
+                <a
+                  href={BAYUT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                >
                   View available units
                   <ArrowRight className="h-4 w-4" />
                 </a>

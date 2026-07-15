@@ -174,17 +174,69 @@ h3.serif {
    on the article/li/figure when the card sits inside an `auto-rows-fr`
    grid and you want equal heights with `mt-auto` pin support. */
 .card-base {
+  position: relative;
+  z-index: 0; /* stacking context so the ::before overlay sits above the bg but below content */
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 18px;
   transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
 }
+/* Hover: every card fades into the brand gradient (same look as .card-gradient).
+   The gradient lives on a ::before overlay because background-image can't
+   transition — opacity can. */
+.card-base::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--gradient-brand);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  z-index: -1;
+  pointer-events: none;
+}
+.card-base:hover::before {
+  opacity: 1;
+}
 .card-base:hover {
-  border-color: var(--border-strong);
-  box-shadow: 0 24px 48px -28px rgba(11, 26, 59, 0.18);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 24px 48px -28px rgba(11, 26, 59, 0.35);
 }
 .dark .card-base:hover {
   box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.6);
+}
+/* Text + icons flip to the white-on-gradient scheme while hovered.
+   Form fields keep their own colors (they sit on their own light bg). */
+.card-base :where(h1, h2, h3, h4, p, span, div, li, a, address, blockquote, figcaption, td, th, legend, label) {
+  transition-property: color;
+  transition-duration: 220ms;
+}
+.card-base:hover
+  :where(h1, h2, h3, h4, p, span, div, li, a, address, blockquote, figcaption, td, th, legend, label, svg) {
+  color: #fff;
+}
+.card-base:hover :where(input, textarea, select) {
+  color: var(--foreground);
+}
+.card-base:hover .text-gradient {
+  background: none;
+  color: #fff;
+}
+.card-base:hover .icon-chip {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+.card-base:hover [class*="bg-brand-50"],
+.card-base:hover [class*="bg-muted"],
+.card-base:hover [class*="bg-card"] {
+  background-color: rgba(255, 255, 255, 0.16);
+}
+.card-base:hover .bg-border {
+  background-color: rgba(255, 255, 255, 0.35);
+}
+.card-base:hover [class*="border-border"],
+.card-base:hover [class*="border-brand"] {
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 /* Subtle accent rule */
