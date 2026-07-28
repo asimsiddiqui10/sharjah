@@ -53,31 +53,23 @@ export function ThemeTransition() {
       { duration: DURATION, easing: EASING }
     );
 
-    // Hero skyline crossfade — find both images by data-attr.
-    const light = document.querySelector<HTMLElement>(
-      '[data-skyline="light"]'
-    );
-    const dark = document.querySelector<HTMLElement>(
-      '[data-skyline="dark"]'
-    );
-    if (light) {
-      light.animate(
-        [
-          { opacity: isDark ? 1 : 0 },
-          { opacity: isDark ? 0 : 1 },
-        ],
-        { duration: DURATION, easing: EASING }
+    // Skyline crossfade — every theme-paired background image on the page.
+    document
+      .querySelectorAll<HTMLElement>('[data-skyline="light"]')
+      .forEach((el) =>
+        el.animate(
+          [{ opacity: isDark ? 1 : 0 }, { opacity: isDark ? 0 : 1 }],
+          { duration: DURATION, easing: EASING }
+        )
       );
-    }
-    if (dark) {
-      dark.animate(
-        [
-          { opacity: isDark ? 0 : 1 },
-          { opacity: isDark ? 1 : 0 },
-        ],
-        { duration: DURATION, easing: EASING }
+    document
+      .querySelectorAll<HTMLElement>('[data-skyline="dark"]')
+      .forEach((el) =>
+        el.animate(
+          [{ opacity: isDark ? 0 : 1 }, { opacity: isDark ? 1 : 0 }],
+          { duration: DURATION, easing: EASING }
+        )
       );
-    }
   }, [resolvedTheme]);
 
   return null;

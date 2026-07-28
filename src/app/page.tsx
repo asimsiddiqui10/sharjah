@@ -351,7 +351,35 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ABOUT — stats + condensed story */}
+      {/* ABOUT + WHY US — sharjah-2 art spans both sections, centred on the
+          seam so it shows through the gap between their content. The wrapper
+          adds no spacing of its own. */}
+      <div className="relative isolate overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-x-0 top-1/2 -z-20 aspect-video w-full -translate-y-1/2"
+        >
+          <Image
+            data-skyline="light"
+            src="/images/sharjah-2-light.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover dark:opacity-0"
+          />
+          <Image
+            data-skyline="dark"
+            src="/images/sharjah-2-dark.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-0 dark:opacity-100"
+          />
+        </div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-background via-background/45 to-background"
+        />
       <Section id="about" className="pt-4 sm:pt-8">
         <SectionHeader
           eyebrow="About us"
@@ -411,6 +439,7 @@ export default function HomePage() {
           ))}
         </RevealGroup>
       </Section>
+      </div>
 
       {/* SERVICES */}
       <Section id="services">
@@ -488,6 +517,34 @@ export default function HomePage() {
       </Section>
 
       {/* MAINTENANCE */}
+      {/* MAINTENANCE + TESTIMONIALS — sharjah-3 art spans both sections,
+          centred on the seam between them. */}
+      <div className="relative isolate overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-x-0 top-1/2 -z-20 aspect-video w-full -translate-y-1/2"
+        >
+          <Image
+            data-skyline="light"
+            src="/images/sharjah-3-light.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover dark:opacity-0"
+          />
+          <Image
+            data-skyline="dark"
+            src="/images/sharjah-3-dark.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-0 dark:opacity-100"
+          />
+        </div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-background via-background/45 to-background"
+        />
       <Section id="maintenance">
         <SectionHeader
           eyebrow="In-house maintenance"
@@ -555,6 +612,7 @@ export default function HomePage() {
           ))}
         </RevealGroup>
       </Section>
+      </div>
 
       {/* FAQ */}
       <Section id="faq">
