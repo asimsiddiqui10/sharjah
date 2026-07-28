@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ComponentType } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -184,15 +185,12 @@ const FAQ = [
 ];
 
 // ——— Contact channels — edit the values below when the real links are ready ———
-const WHATSAPP_NUMBER = "971500000000"; // full international number, no "+", spaces, or dashes
 const CONTACT_EMAIL = "info@almajazalkhleej.ae";
 const BAYUT_URL = "https://www.bayut.com/l/BbILZ5ek";
 const DUBIZZLE_URL =
   "https://uae.dubizzle.com/property-agencies/al-majaz-alkhleej-facilities-management-services-300128/?category_0=property-for-rent&category_1=property-for-rent%2Fresidential";
 
-const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  "Hi, I am interested in your property from your website."
-)}`;
+const WHATSAPP_LINK = "https://wa.me/message/WXCLK563KOHXP1";
 const EMAIL_LINK = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
   "Property Inquiry"
 )}&body=${encodeURIComponent(
@@ -207,35 +205,18 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-// Bayut's app mark — white house on the brand green tile.
-function BayutIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
-      <path d="M12 2.5 2.5 11h2.3v10h5.7v-6.2h3v6.2h5.7V11h2.3L12 2.5z" />
-    </svg>
-  );
-}
+type Channel = {
+  key: string;
+  title: string;
+  secondary: string;
+  href: string;
+  external: boolean;
+  icon?: ComponentType<{ className?: string }>;
+  iconClass?: string;
+  img?: string; // official brand icon, served from /public/images (originals in /Assets)
+};
 
-// Dubizzle's app mark — white lowercase "d" on the brand red tile.
-function DubizzleIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden className={className}>
-      <text
-        x="12"
-        y="17.5"
-        textAnchor="middle"
-        fontSize="17"
-        fontWeight="700"
-        fontFamily="Arial, Helvetica, sans-serif"
-        fill="currentColor"
-      >
-        d
-      </text>
-    </svg>
-  );
-}
-
-const CHANNELS = [
+const CHANNELS: Channel[] = [
   {
     key: "whatsapp",
     title: "WhatsApp",
@@ -260,8 +241,7 @@ const CHANNELS = [
     secondary: "Browse our live listings",
     href: BAYUT_URL,
     external: true,
-    icon: BayutIcon,
-    iconClass: "bg-[#28B16D] text-white",
+    img: "/images/bayut.png",
   },
   {
     key: "dubizzle",
@@ -269,8 +249,7 @@ const CHANNELS = [
     secondary: "Browse our live listings",
     href: DUBIZZLE_URL,
     external: true,
-    icon: DubizzleIcon,
-    iconClass: "bg-[#EF3E23] text-white",
+    img: "/images/dubizzle.png",
   },
 ];
 
@@ -347,7 +326,7 @@ export default function HomePage() {
                   href={BAYUT_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-primary"
+                  className="btn btn-secondary"
                 >
                   View available units
                   <ArrowRight className="h-4 w-4" />
@@ -599,7 +578,7 @@ export default function HomePage() {
           className="mt-12 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-4"
           step={70}
         >
-          {CHANNELS.map(({ key, icon: Icon, iconClass, title, secondary, href, external }) => (
+          {CHANNELS.map(({ key, icon: Icon, iconClass, img, title, secondary, href, external }) => (
             <a
               key={key}
               href={href}
@@ -608,11 +587,23 @@ export default function HomePage() {
                 : {})}
               className="card-base group flex h-full items-center gap-4 p-5 transition-transform hover:-translate-y-0.5"
             >
-              <span
-                className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${iconClass}`}
-              >
-                <Icon className="h-5 w-5" />
-              </span>
+              {img ? (
+                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white ring-1 ring-black/5">
+                  <Image
+                    src={img}
+                    alt=""
+                    width={44}
+                    height={44}
+                    className="h-full w-full object-contain p-1.5"
+                  />
+                </span>
+              ) : Icon ? (
+                <span
+                  className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${iconClass}`}
+                >
+                  <Icon className="h-5 w-5" />
+                </span>
+              ) : null}
               <span className="min-w-0">
                 <span className="flex items-center gap-1.5 font-medium text-sm">
                   {title}
@@ -663,7 +654,9 @@ export default function HomePage() {
               <address className="mt-4 not-italic text-sm text-muted-foreground leading-relaxed">
                 Al Majaz Al Khleej Facilities Management LLC
                 <br />
-                Al Majaz, Sharjah
+                Al Wahda St — Al Darari Commercial
+                <br />
+                Industrial Area, Sharjah
                 <br />
                 United Arab Emirates
               </address>
