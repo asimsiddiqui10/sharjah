@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Send, CheckCircle2 } from "lucide-react";
 
+const CONTACT_EMAIL = "info@almajazalkhleej.ae";
+
 const inputClass =
   "mt-2 w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm placeholder:text-muted-foreground/70 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20 transition-colors";
 
@@ -19,11 +21,18 @@ export function ContactForm() {
           className="font-serif text-2xl tracking-tight"
           style={{ fontFamily: "var(--font-eb-garamond)" }}
         >
-          Thank you — your message has been received.
+          Almost there — your email app should now be open.
         </h3>
         <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-          A member of our team will be in touch within 4 business hours. For
-          urgent maintenance, please call our emergency line directly.
+          Your message is pre-filled and addressed to us — just press send in
+          your mail app. If nothing opened, email us directly at{" "}
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="font-medium text-foreground underline underline-offset-2"
+          >
+            {CONTACT_EMAIL}
+          </a>{" "}
+          or reach us on WhatsApp above. We reply within 4 business hours.
         </p>
         <button
           type="button"
@@ -40,6 +49,24 @@ export function ContactForm() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        // mailto fallback — no backend: open the visitor's mail app with
+        // the form contents pre-filled, addressed to our inbox.
+        const data = new FormData(e.currentTarget);
+        const name = String(data.get("name") ?? "");
+        const phone = String(data.get("phone") ?? "");
+        const email = String(data.get("email") ?? "");
+        const message = String(data.get("message") ?? "");
+        const subject = `Website enquiry from ${name}`;
+        const body = [
+          `Name: ${name}`,
+          `Phone: ${phone}`,
+          `Email: ${email}`,
+          "",
+          message,
+        ].join("\n");
+        window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+          subject
+        )}&body=${encodeURIComponent(body)}`;
         setSubmitted(true);
       }}
       className="card-base p-8 sm:p-10 space-y-6"
