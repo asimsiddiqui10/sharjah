@@ -365,7 +365,7 @@ export default function HomePage() {
             alt=""
             fill
             sizes="100vw"
-            className="object-cover dark:opacity-0"
+            className="object-cover saturate-[1.1] contrast-[1.1] dark:opacity-0"
           />
           <Image
             data-skyline="dark"
@@ -407,7 +407,7 @@ export default function HomePage() {
           Founded in Sharjah in 1984 on a simple principle: own the properties,
           manage them directly, maintain them properly, and treat every tenant as
           a long-term relationship. Four decades later, that principle hasn&apos;t
-          changed — 750 units across the city&apos;s most established
+          changed — 750+ units across the city&apos;s most established
           neighbourhoods, run by one owner, one team, one standard.
         </p>
       </Section>
@@ -478,7 +478,7 @@ export default function HomePage() {
       <Section id="properties">
         <SectionHeader
           eyebrow="Our properties"
-          title="750 units. One standard of living."
+          title="750+ units. One standard of living."
           intro="Studios to family apartments across Sharjah's most established, well-connected communities — maintained and improved over decades."
         />
         <RevealGroup
@@ -534,7 +534,7 @@ export default function HomePage() {
             alt=""
             fill
             sizes="100vw"
-            className="object-cover dark:opacity-0"
+            className="object-cover saturate-[1.1] contrast-[1.1] dark:opacity-0"
           />
           <Image
             data-skyline="dark"
